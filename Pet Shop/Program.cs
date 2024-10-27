@@ -23,17 +23,18 @@ while (userInput != "exit")
             CatFood catFood = new CatFood();
             Console.Write("New cat food\nEnter Name: ");
             catFood.Name = Console.ReadLine();
-            string priceInput;
+            string? priceInput;
             decimal price;
             do
             {
                 Console.Write("Enter Price: ");
                 priceInput = Console.ReadLine();
+                
             }
             while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
             catFood.Price = price;
 
-            string quantityInput;
+            string? quantityInput;
             int quantity;
             do
             {
@@ -45,7 +46,7 @@ while (userInput != "exit")
             Console.Write("Enter Description: ");
             catFood.Description = Console.ReadLine();
 
-            string weightInput;
+            string? weightInput;
             double weight;
             do
             {
@@ -55,7 +56,7 @@ while (userInput != "exit")
             while (!double.TryParse(weightInput, out weight));
             catFood.WeightPounds = weight;
 
-            string kittenInput;
+            string? kittenInput;
             bool kittenfood;
             do
             {
@@ -75,7 +76,7 @@ while (userInput != "exit")
             DogLeash dogLeash = new DogLeash();
             Console.Write("New dog leash\nEnter Name: ");
             dogLeash.Name = Console.ReadLine();
-            string priceInput;
+            string? priceInput;
             decimal price;
             do
             {
@@ -85,7 +86,7 @@ while (userInput != "exit")
             while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
             dogLeash.Price = price;
 
-            string quantityInput;
+            string? quantityInput;
             int quantity;
             do
             {
@@ -98,7 +99,7 @@ while (userInput != "exit")
             Console.Write("Enter Description: ");
             dogLeash.Description = Console.ReadLine();
 
-            string lengthInput;
+            string? lengthInput;
             int length;
             do
             {
@@ -123,7 +124,7 @@ while (userInput != "exit")
             Console.Write("New dog food\nEnter Name: ");
             dogFood.Name = Console.ReadLine();
 
-            string priceInput;
+            string? priceInput;
             decimal price;
             do
             {
@@ -133,7 +134,7 @@ while (userInput != "exit")
             while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
             dogFood.Price = price;
 
-            string quantityInput;
+            string? quantityInput;
             int quantity;
             do
             {
@@ -145,7 +146,7 @@ while (userInput != "exit")
             Console.Write("Enter Description: ");
             dogFood.Description = Console.ReadLine();
 
-            string weightInput;
+            string? weightInput;
             double weight;
             do
             {
@@ -155,7 +156,7 @@ while (userInput != "exit")
             while (!double.TryParse(weightInput, out weight));
             dogFood.WeightPounds = weight;
 
-            string puppyInput;
+            string? puppyInput;
             bool puppyfood;
             do
             {
@@ -176,7 +177,8 @@ while (userInput != "exit")
             DogToy dogToy = new DogToy();
             Console.WriteLine("New dog toy\nEnter Name: ");
             dogToy.Name = Console.ReadLine();
-            string priceInput;
+
+            string? priceInput;
             decimal price;
             do
             {
@@ -185,7 +187,8 @@ while (userInput != "exit")
             }
             while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
             dogToy.Price = price;
-            string quantityInput;
+
+            string? quantityInput;
             int quantity;
             do
             {
@@ -201,7 +204,8 @@ while (userInput != "exit")
             dogToy.Material = Console.ReadLine();
             Console.WriteLine("Enter Color: ");
             dogToy.Color = Console.ReadLine();
-            string lengthInput;
+
+            string? lengthInput;
             int length;
             do
             {
@@ -222,7 +226,8 @@ while (userInput != "exit")
             CatToy catToy = new CatToy();
             Console.WriteLine("New cat toy\nEnter Name: ");
             catToy.Name = Console.ReadLine();
-            string priceInput;
+
+            string? priceInput;
             decimal price;
             do
             {
@@ -231,7 +236,8 @@ while (userInput != "exit")
             }
             while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
             catToy.Price = price;
-            string quantityInput;
+
+            string? quantityInput;
             int quantity;
             do
             {
@@ -247,7 +253,8 @@ while (userInput != "exit")
             catToy.Material = Console.ReadLine();
             Console.WriteLine("Enter Color: ");
             catToy.Color = Console.ReadLine();
-            string lengthInput;
+
+            string? lengthInput;
             int length;
             do
             {
