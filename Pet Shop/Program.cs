@@ -18,8 +18,12 @@ while (userInput.ToLower() != "exit")
         Console.WriteLine("Add a new product by typing the corresponding number");
         Console.WriteLine("Available types:\n1. Cat Food\n2. Dog Leash\n3. Dog Food\n4. Dog Toy\n5. Cat Toy");
         string? productType = Console.ReadLine();
+        if (productType.ToLower() == "exit")
+        {
+            Environment.Exit(0);
+        }
 
-        if ((productType?.ToLower() ?? "") == "1")
+        else if ((productType?.ToLower() ?? "") == "1")
         {
             CatFood catFood = new CatFood();
             Console.Write("New cat food\nEnter Name: ");
