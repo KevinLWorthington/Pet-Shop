@@ -2,15 +2,16 @@
 using Pet_Shop;
 using System.Text.Json;
 
+var productLogic = new ProductLogic();
 Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("Welcome to the Pet Shop Inventory System\nPress 1 to add a product\nType 'exit' to quit");
+Console.WriteLine("Welcome to the Pet Shop Inventory System\nPress 1 to add a product\nPress 2 to view all products\nType 'exit' to quit");
 Console.ForegroundColor = ConsoleColor.Gray;
 string? userInput = Console.ReadLine();
 
 
 
 
-while (userInput != "exit")
+while (userInput.ToLower() != "exit")
 {
     if (userInput == "1")
     {
@@ -65,11 +66,18 @@ while (userInput != "exit")
             }
             while (!bool.TryParse(kittenInput, out kittenfood));
             catFood.KittenFood = kittenfood;
+            
+            productLogic.AddProduct(catFood);
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(JsonSerializer.Serialize(catFood));
+            Console.WriteLine("Added " + catFood.Name);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");
+            /* Console.ForegroundColor = ConsoleColor.Cyan;
+             Console.WriteLine(JsonSerializer.Serialize(catFood));
+             Console.ForegroundColor = ConsoleColor.Gray;
+             Console.WriteLine("Type 'exit' to quit");
+             Console.WriteLine("Type '1' to enter another product");*/
         }
         else if (productType.ToLower() == "2")
         {
@@ -112,11 +120,18 @@ while (userInput != "exit")
             Console.Write("Enter Material: ");
             dogLeash.Material = Console.ReadLine();
 
+            productLogic.AddProduct(dogLeash);
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Added " + dogLeash.Name);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            /*Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(JsonSerializer.Serialize(dogLeash));
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");
+            Console.WriteLine("Type '1' to enter another product");*/
         }
         else if (productType.ToLower() == "3")
         {
@@ -166,11 +181,19 @@ while (userInput != "exit")
             while (!bool.TryParse(puppyInput, out puppyfood));
             dogFood.PuppyFood = puppyfood;
 
+            productLogic.AddProduct(dogFood);
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(JsonSerializer.Serialize(dogFood));
+            Console.WriteLine("Added " + dogFood.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            /* Console.ForegroundColor = ConsoleColor.Cyan;
+             Console.WriteLine(JsonSerializer.Serialize(dogFood));
+             Console.ForegroundColor = ConsoleColor.Gray;
+             Console.WriteLine("Type 'exit' to quit");
+             Console.WriteLine("Type '1' to enter another product"); */
         }
         else if (productType.ToLower() == "4")
         {
@@ -215,11 +238,19 @@ while (userInput != "exit")
             while (!int.TryParse(lengthInput, out length));
             dogToy.Size = length;
 
+            productLogic.AddProduct(dogToy);
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Added " + dogToy.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            /*Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(JsonSerializer.Serialize(dogToy));
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");
+            Console.WriteLine("Type '1' to enter another product");*/
         }
         else if (productType.ToLower() == "5")
         {
@@ -264,11 +295,19 @@ while (userInput != "exit")
             while (!int.TryParse(lengthInput, out length));
             catToy.Size = length;
 
+            productLogic.AddProduct(catToy);
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Added " + catToy.Name);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            /*Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(JsonSerializer.Serialize(catToy));
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");
+            Console.WriteLine("Type '1' to enter another product");*/
         }
 
         else
@@ -279,7 +318,20 @@ while (userInput != "exit")
             Console.ReadLine();
         }
     }
+    if (userInput == "2")
+    {
+        List<Product> allProducts = productLogic.GetAllProducts();
 
+        // Print the list of products
+        foreach (var product in allProducts)
+        {
+            Console.WriteLine(product.Name + (JsonSerializer.Serialize(product)));
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+        Console.ForegroundColor = ConsoleColor.Gray;
+    }
+    
     userInput = Console.ReadLine();
 
 
