@@ -57,7 +57,14 @@ namespace Pet_Shop
         }
         public List<Product> GetAllProducts()
         {
-            return _products;
+            try
+            {
+                return _products;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
     }

@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Pet_Shop;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 var productLogic = new ProductLogic();
@@ -329,8 +331,46 @@ while (userInput.ToLower() != "exit")
         // Print the list of products
         foreach (var product in allProducts)
         {
-            Console.WriteLine(product.Name + (JsonSerializer.Serialize(product)));
+            //Console.WriteLine(product.Name + (JsonSerializer.Serialize(product)));
+            Console.WriteLine("Product name:\t" + product.Name);
+            Console.WriteLine("Description:\t" + product.Description);
+            Console.WriteLine("Price:\t\t$" + product.Price);
+            Console.WriteLine("Quantity:\t" + product.Quantity);
+
+            if (product is DogLeash dogLeash)
+            {
+                Console.WriteLine("Length(in):\t\t" + dogLeash.LengthInches + "\"");
+                Console.WriteLine("Material:\t" + dogLeash.Material);
+                Console.WriteLine("-------------------------------------------------------");
+            }
+            else if (product is CatFood catFood)
+            {
+                Console.WriteLine("Weight(lbs):\t\t" + catFood.WeightPounds);
+                Console.WriteLine("Kitten Food:\t" + catFood.KittenFood);
+                Console.WriteLine("-------------------------------------------------------");
+            }
+            else if (product is DogFood dogFood)
+            {
+                Console.WriteLine("Weight(lbs):\t\t" + dogFood.WeightPounds);
+                Console.WriteLine("Puppy Food:\t" + dogFood.PuppyFood);
+                Console.WriteLine("-------------------------------------------------------");
+            }
+            else if (product is DogToy dogToy)
+            {
+                Console.WriteLine("Material:\t" + dogToy.Material);
+                Console.WriteLine("Color:\t\t" + dogToy.Color);
+                Console.WriteLine("Size(in):\t\t" + dogToy.Size + "\"");
+                Console.WriteLine("-------------------------------------------------------");
+            }
+            else if (product is CatToy catToy)
+            {
+                Console.WriteLine("Material:\t" + catToy.Material);
+                Console.WriteLine("Color:\t\t" + catToy.Color);
+                Console.WriteLine("Size(in):\t\t" + catToy.Size + "\"");
+                Console.WriteLine("-------------------------------------------------------");
+            }
         }
+        
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;
