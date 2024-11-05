@@ -79,11 +79,6 @@ while (userInput.ToLower() != "exit")
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
-            /* Console.ForegroundColor = ConsoleColor.Cyan;
-             Console.WriteLine(JsonSerializer.Serialize(catFood));
-             Console.ForegroundColor = ConsoleColor.Gray;
-             Console.WriteLine("Type 'exit' to quit");
-             Console.WriteLine("Type '1' to enter another product");*/
         }
         else if (productType.ToLower() == "2")
         {
@@ -132,12 +127,6 @@ while (userInput.ToLower() != "exit")
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
-
-            /*Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(JsonSerializer.Serialize(dogLeash));
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");*/
         }
         else if (productType.ToLower() == "3")
         {
@@ -194,12 +183,6 @@ while (userInput.ToLower() != "exit")
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
-
-            /* Console.ForegroundColor = ConsoleColor.Cyan;
-             Console.WriteLine(JsonSerializer.Serialize(dogFood));
-             Console.ForegroundColor = ConsoleColor.Gray;
-             Console.WriteLine("Type 'exit' to quit");
-             Console.WriteLine("Type '1' to enter another product"); */
         }
         else if (productType.ToLower() == "4")
         {
@@ -251,12 +234,6 @@ while (userInput.ToLower() != "exit")
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
-
-            /*Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(JsonSerializer.Serialize(dogToy));
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Type 'exit' to quit");
-            Console.WriteLine("Type '1' to enter another product");*/
         }
         else if (productType.ToLower() == "5")
         {
@@ -328,49 +305,11 @@ while (userInput.ToLower() != "exit")
     {
         List<Product> allProducts = productLogic.GetAllProducts();
 
-        // Print the list of products
-        foreach (var product in allProducts)
-        {
-            //Console.WriteLine(product.Name + (JsonSerializer.Serialize(product)));
-            Console.WriteLine("Product name:\t" + product.Name);
-            Console.WriteLine("Description:\t" + product.Description);
-            Console.WriteLine("Price:\t\t$" + product.Price);
-            Console.WriteLine("Quantity:\t" + product.Quantity);
+        ProductPrinter productPrinter = new ProductPrinter();
 
-            if (product is DogLeash dogLeash)
-            {
-                Console.WriteLine("Length(in):\t\t" + dogLeash.LengthInches + "\"");
-                Console.WriteLine("Material:\t" + dogLeash.Material);
-                Console.WriteLine("-------------------------------------------------------");
-            }
-            else if (product is CatFood catFood)
-            {
-                Console.WriteLine("Weight(lbs):\t\t" + catFood.WeightPounds);
-                Console.WriteLine("Kitten Food:\t" + catFood.KittenFood);
-                Console.WriteLine("-------------------------------------------------------");
-            }
-            else if (product is DogFood dogFood)
-            {
-                Console.WriteLine("Weight(lbs):\t\t" + dogFood.WeightPounds);
-                Console.WriteLine("Puppy Food:\t" + dogFood.PuppyFood);
-                Console.WriteLine("-------------------------------------------------------");
-            }
-            else if (product is DogToy dogToy)
-            {
-                Console.WriteLine("Material:\t" + dogToy.Material);
-                Console.WriteLine("Color:\t\t" + dogToy.Color);
-                Console.WriteLine("Size(in):\t\t" + dogToy.Size + "\"");
-                Console.WriteLine("-------------------------------------------------------");
-            }
-            else if (product is CatToy catToy)
-            {
-                Console.WriteLine("Material:\t" + catToy.Material);
-                Console.WriteLine("Color:\t\t" + catToy.Color);
-                Console.WriteLine("Size(in):\t\t" + catToy.Size + "\"");
-                Console.WriteLine("-------------------------------------------------------");
-            }
-        }
-        
+        productPrinter.PrintProductDetails(allProducts);
+
+             
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;

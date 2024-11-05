@@ -8,8 +8,8 @@ namespace Pet_Shop
 {
     public class CatToy : Product
     {
-        public string Material { get; set; }
-        public string Color { get; set; }
+        public string? Material { get; set; }
+        public string? Color { get; set; }
         public int Size { get; set; }
     }
 }

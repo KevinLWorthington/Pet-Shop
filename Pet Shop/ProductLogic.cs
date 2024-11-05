@@ -55,7 +55,7 @@ namespace Pet_Shop
 
             
         }
-        public List<Product> GetAllProducts()
+        public List<Product>? GetAllProducts()
         {
             try
             {
