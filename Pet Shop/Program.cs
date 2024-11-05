@@ -1,10 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Pet_Shop;
+using Pet_Shop.Classes;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 var productLogic = new ProductLogic();
+Artwork artwork = new Artwork();
+Artwork.PrintCat();
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("Welcome to the Pet Shop Inventory System\nPress 1 to add a product\nPress 2 to view all products\nType 'exit' to quit");
 Console.ForegroundColor = ConsoleColor.Gray;
