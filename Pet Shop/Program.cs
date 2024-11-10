@@ -5,17 +5,19 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
+// Initiate classes and prompt user for input
 var productLogic = new ProductLogic();
-Artwork artwork = new Artwork();
+Artwork artwork = new();
 Artwork.PrintCat();
 Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("Welcome to the Pet Shop Inventory System\nPress 1 to add a product\nPress 2 to view all products\nType 'exit' to quit");
+Console.WriteLine("Welcome to the Pet Shop Inventory System\nPress 1 to add a product\nPress 2 to view all products");
+Console.WriteLine("Press 3 to view products by type\nType 'exit' to quit");
 Console.ForegroundColor = ConsoleColor.Gray;
 string? userInput = Console.ReadLine();
 
 
 
-
+//As long as the user doesn't enter the word "exit" the loop will run to enter product info
 while (userInput.ToLower() != "exit")
 {
     if (userInput == "1")
@@ -30,7 +32,7 @@ while (userInput.ToLower() != "exit")
 
         else if ((productType?.ToLower() ?? "") == "1")
         {
-            CatFood catFood = new CatFood();
+            CatFood catFood = new();
             Console.Write("New cat food\nEnter Name: ");
             catFood.Name = Console.ReadLine();
             string? priceInput;
@@ -80,12 +82,12 @@ while (userInput.ToLower() != "exit")
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Added " + catFood.Name);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
         else if (productType.ToLower() == "2")
         {
-            DogLeash dogLeash = new DogLeash();
+            DogLeash dogLeash = new();
             Console.Write("New dog leash\nEnter Name: ");
             dogLeash.Name = Console.ReadLine();
             string? priceInput;
@@ -128,12 +130,12 @@ while (userInput.ToLower() != "exit")
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Added " + dogLeash.Name);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
         else if (productType.ToLower() == "3")
         {
-            DogFood dogFood = new DogFood();
+            DogFood dogFood = new();
             Console.Write("New dog food\nEnter Name: ");
             dogFood.Name = Console.ReadLine();
 
@@ -184,12 +186,12 @@ while (userInput.ToLower() != "exit")
             Console.WriteLine("Added " + dogFood.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
         else if (productType.ToLower() == "4")
         {
-            DogToy dogToy = new DogToy();
+            DogToy dogToy = new();
             Console.WriteLine("New dog toy\nEnter Name: ");
             dogToy.Name = Console.ReadLine();
 
@@ -235,12 +237,12 @@ while (userInput.ToLower() != "exit")
             Console.WriteLine("Added " + dogToy.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
         else if (productType.ToLower() == "5")
         {
-            CatToy catToy = new CatToy();
+            CatToy catToy = new();
             Console.WriteLine("New cat toy\nEnter Name: ");
             catToy.Name = Console.ReadLine();
 
@@ -286,7 +288,7 @@ while (userInput.ToLower() != "exit")
             Console.WriteLine("Added " + catToy.Name);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
             Console.ForegroundColor = ConsoleColor.Gray;
 
             /*Console.ForegroundColor = ConsoleColor.Cyan;
@@ -295,7 +297,8 @@ while (userInput.ToLower() != "exit")
             Console.WriteLine("Type 'exit' to quit");
             Console.WriteLine("Type '1' to enter another product");*/
         }
-
+        
+        //Notifies user that their input is not valid
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -304,17 +307,31 @@ while (userInput.ToLower() != "exit")
             Console.ReadLine();
         }
     }
+
+    //If user chooses to diplay products already entered, display those products
     if (userInput == "2")
     {
         List<Product> allProducts = productLogic.GetAllProducts();
 
-        ProductPrinter productPrinter = new ProductPrinter();
+        ProductPrinter productPrinter = new();
 
         productPrinter.PrintProductDetails(allProducts);
 
              
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nType 'exit' to quit");
+        Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
+        Console.ForegroundColor = ConsoleColor.Gray;
+    }
+    if (userInput == "3")
+    {
+        List<Product> allProducts = productLogic.GetAllProducts();
+
+        PrintByType printProduct = new PrintByType();
+
+        printProduct.PrintProduct(allProducts);
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;
     }
     
