@@ -14,7 +14,7 @@ namespace Pet_Shop.Classes
         }
         public static decimal DiscountThisPrice(this decimal value)
         {
-            return value * Math.Round(0.9M);
+            return value * 0.9M;
         }
     }
 }

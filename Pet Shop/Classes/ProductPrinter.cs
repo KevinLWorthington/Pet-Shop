@@ -36,18 +36,18 @@ namespace Pet_Shop
                     else if (product is CatFood catFood)
                     {
                         Console.WriteLine("Weight(lbs):\t" + catFood.WeightPounds);
-                        Console.WriteLine("Kitten Food:\t" + catFood.KittenFood);
+                        Console.WriteLine("For kittens:\t" + catFood.KittenFood);
                     }
                     else if (product is DogFood dogFood)
                     {
                         Console.WriteLine("Weight(lbs):\t" + dogFood.WeightPounds);
-                        Console.WriteLine("Puppy Food:\t" + dogFood.PuppyFood);
+                        Console.WriteLine("For puppies:\t" + dogFood.PuppyFood);
                     }
                     else if (product is DogToy dogToy)
                     {
                         Console.WriteLine("Material:\t" + dogToy.Material);
                         Console.WriteLine("Color:\t\t" + dogToy.Color);
-                        Console.WriteLine("Size(in):\t\t" + dogToy.Size + "\"");
+                        Console.WriteLine("Size(in):\t" + dogToy.Size + "\"");
                     }
                     else if (product is CatToy catToy)
                     {
@@ -61,7 +61,9 @@ namespace Pet_Shop
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.ReadKey();
             }
 

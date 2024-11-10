@@ -319,7 +319,7 @@ while (userInput.ToLower() != "exit")
 
              
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
+        Console.WriteLine("Press 1 to add a product\nPress 2 to view all products\nPress 3 to view product by type\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;
     }
     if (userInput == "3")
@@ -331,7 +331,7 @@ while (userInput.ToLower() != "exit")
         printProduct.PrintProduct(allProducts);
 
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nType 'exit' to quit");
+        Console.WriteLine("Press 1 to add a product\nPress 2 to view all products\nPress 3 to view product by type\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;
     }
     
