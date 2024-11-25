@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pet_Shop.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pet_Shop
 {
-    internal class ProductLogic
+    internal class ProductLogic : IProductLogic
     {
         private List<Product> _products;
         private Dictionary<string, CatFood> _catFood;
@@ -18,7 +19,27 @@ namespace Pet_Shop
 
         public ProductLogic()
         {
-            _products = new List<Product>();
+            _products = new List<Product>()
+            {
+                new DogLeash
+                {
+                    Name = "Dog Leash",
+                    Description = "For dogs.",
+                    LengthInches = 50,
+                    Material = "Nylon",
+                    Price = 45.00m,
+                    Quantity = 0
+                },
+                new CatFood
+                {
+                    Name = "Cat Food",
+                    Description = "For Cats.",
+                    Quantity = 2,
+                    Price = 14.00m,                    
+                    WeightPounds = 10,
+                    KittenFood = false
+                }
+            };
             _dogLeash = new Dictionary<string, DogLeash>();
             _catFood = new Dictionary<string, CatFood>();
             _dogFood = new Dictionary<string, DogFood>();
@@ -66,6 +87,11 @@ namespace Pet_Shop
                 return null;
             }
         }
+        public List<string?> GetOnlyInStockProducts()
+        {
+            return _products.Where(static x => x.Quantity > 0).Select(static x => x.Name).ToList();
+        }
     }
-    }
+    
+}
 
