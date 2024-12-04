@@ -5,11 +5,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Pet_Shop.Classes;
+using Pet_Shop.Classes.Products;
 
 namespace Pet_Shop
 {
     public class ProductPrinter
     {
+        // Method to print all product details
         public void PrintProductDetails(List<Product> allProducts)
         {
             try             //Throw exception if no products have been entered when trying to view all products

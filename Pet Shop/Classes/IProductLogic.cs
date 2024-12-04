@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pet_Shop.Classes.Products;
+
 
 namespace Pet_Shop.Classes
 {
@@ -13,5 +10,7 @@ namespace Pet_Shop.Classes
         public List<Product>? GetAllProducts();
 
         public List<string?> GetOnlyInStockProducts();
+
+        public decimal GetTotalPriceOfInventory();
     }
 }

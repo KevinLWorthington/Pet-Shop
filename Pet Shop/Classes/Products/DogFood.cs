@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pet_Shop
+namespace Pet_Shop.Classes.Products
 {
     public class DogFood : Product
     {

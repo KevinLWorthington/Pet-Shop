@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pet_Shop.Classes.Products;
 
 namespace Pet_Shop.Classes
 {
     public class PrintByType
     {
+        //Prints all products by type
         public void PrintProduct(List<Product> allProducts)
         {
             try             //Throw exception if no products have been entered when trying to view all products
@@ -124,7 +120,7 @@ namespace Pet_Shop.Classes
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor= ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.ReadKey();

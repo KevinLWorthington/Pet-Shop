@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pet_Shop
+namespace Pet_Shop.Classes.Products
 {
-    public class CatToy : Product
+    public class DogLeash : Product
     {
+        public int LengthInches { get; set; }
         public string? Material { get; set; }
-        public string? Color { get; set; }
-        public int Size { get; set; }
     }
 }

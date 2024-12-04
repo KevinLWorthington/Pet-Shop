@@ -1,13 +1,9 @@
 ﻿using Pet_Shop.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Pet_Shop.Classes.Products;
 
 namespace Pet_Shop
 {
+    //Dictionary for each type of product
     internal class ProductLogic : IProductLogic
     {
         private List<Product> _products;
@@ -35,7 +31,7 @@ namespace Pet_Shop
                     Name = "Cat Food",
                     Description = "For Cats.",
                     Quantity = 2,
-                    Price = 14.00m,                    
+                    Price = 14.00m,
                     WeightPounds = 10,
                     KittenFood = false
                 }
@@ -50,6 +46,7 @@ namespace Pet_Shop
         public void AddProduct(Product product)
         {
             {
+                //Add each product to the appropriate dictionary
                 if (product is DogLeash)
                 {
                     _dogLeash.Add(product.Name, product as DogLeash);
@@ -74,8 +71,44 @@ namespace Pet_Shop
 
             }
 
-            
+
         }
+        //Get products by name
+        public T GetProductByName<T>(string name) where T : Product
+        {
+            try
+            {
+                if (typeof(T) == typeof(DogLeash))
+                {
+                    return _dogLeash[name] as T;
+                }
+                else if (typeof(T) == typeof(CatFood))
+                {
+                    return _catFood[name] as T;
+                }
+                else if (typeof(T) == typeof(DogFood))
+                {
+                    return _dogFood[name] as T;
+                }
+                else if (typeof(T) == typeof(DogToy))
+                {
+                    return _dogToy[name] as T;
+                }
+                else if (typeof(T) == typeof(CatToy))
+                {
+                    return _catToy[name] as T;
+                }                
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        //Get all products that have been entered
         public List<Product>? GetAllProducts()
         {
             try
@@ -87,11 +120,17 @@ namespace Pet_Shop
                 return null;
             }
         }
+        //Get all products that are in stock
         public List<string?> GetOnlyInStockProducts()
         {
             return _products.Where(static x => x.Quantity > 0).Select(static x => x.Name).ToList();
         }
+        //Get the total value of the instock products
+        public decimal GetTotalPriceOfInventory()
+        {
+            return _products.InStock().Select(x => x.Price).Sum();
+        }
     }
-    
+
 }
 

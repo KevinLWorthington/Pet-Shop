@@ -1,13 +1,19 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Microsoft.Extensions.DependencyInjection;
 using Pet_Shop;
 using Pet_Shop.Classes;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+using Pet_Shop.Classes.Products;
 using System.Text.Json;
 
 // Initiate classes and prompt user for input
-var productLogic = new ProductLogic();
-Artwork artwork = new();
+static IServiceProvider CreateServiceCollection()
+{
+    return new ServiceCollection()
+        .AddTransient<IProductLogic, ProductLogic>()
+        .BuildServiceProvider();
+}
+var services = CreateServiceCollection();
+var productLogic = services.GetService<IProductLogic>();
 Artwork.PrintCat();
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("Welcome to the Pet Shop Inventory System\nPress 1 to add a product\nPress 2 to view all products");
@@ -32,107 +38,134 @@ while (userInput.ToLower() != "exit")
 
         else if ((productType?.ToLower() ?? "") == "1")
         {
-            CatFood catFood = new();
-            Console.Write("New cat food\nEnter Name: ");
-            catFood.Name = Console.ReadLine();
-            string? priceInput;
-            decimal price;
-            do
+            Console.WriteLine("Add new cat food in JSON format:");
+            var userInputAsJson = Console.ReadLine();
+            try
             {
-                Console.Write("Enter Price: ");
-                priceInput = Console.ReadLine();
-                
-            }
-            while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
-            catFood.Price = price;
+                var catFood = userInputAsJson != null ? JsonSerializer.Deserialize<CatFood>(userInputAsJson) : null;
 
-            string? quantityInput;
-            int quantity;
-            do
-            {
-                Console.Write("Enter Quantity: ");
-                quantityInput = Console.ReadLine();
-            }
-            while (!int.TryParse(quantityInput, out quantity));
-            catFood.Quantity = quantity;
-            Console.Write("Enter Description: ");
-            catFood.Description = Console.ReadLine();
 
-            string? weightInput;
-            double weight;
-            do
-            {
-                Console.Write("Enter Weight (in pounds): ");
-                weightInput = Console.ReadLine();
-            }
-            while (!double.TryParse(weightInput, out weight));
-            catFood.WeightPounds = weight;
+                /* CatFood catFood = new();
+                Console.Write("New cat food\nEnter Name: ");
+                catFood.Name = Console.ReadLine();
+               string? priceInput;
+               decimal price;
 
-            string? kittenInput;
-            bool kittenfood;
-            do
-            {
-                Console.Write("Is it Kitten Food? (please type true or false): ");
-                kittenInput = Console.ReadLine();
+                do
+                {
+                    Console.Write("Enter Price: ");
+                    priceInput = Console.ReadLine();
+
+                }
+                while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
+                catFood.Price = price;
+
+                string? quantityInput;
+                int quantity;
+                do
+                {
+                    Console.Write("Enter Quantity: ");
+                    quantityInput = Console.ReadLine();
+                }
+                while (!int.TryParse(quantityInput, out quantity));
+                catFood.Quantity = quantity;
+                Console.Write("Enter Description: ");
+                catFood.Description = Console.ReadLine();
+
+                string? weightInput;
+                double weight;
+                do
+                {
+                    Console.Write("Enter Weight (in pounds): ");
+                    weightInput = Console.ReadLine();
+                }
+                while (!double.TryParse(weightInput, out weight));
+                catFood.WeightPounds = weight;
+
+                string? kittenInput;
+                bool kittenfood;
+                do
+                {
+                    Console.Write("Is it Kitten Food? (please type true or false): ");
+                    kittenInput = Console.ReadLine();
+                }
+                while (!bool.TryParse(kittenInput, out kittenfood));
+                catFood.KittenFood = kittenfood; */
+
+                productLogic?.AddProduct(catFood);
+
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Added " + catFood?.Name);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nPress 4 to see which products are in stock\nType 'exit' to quit");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
-            while (!bool.TryParse(kittenInput, out kittenfood));
-            catFood.KittenFood = kittenfood;
-            
-            productLogic.AddProduct(catFood);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Added " + catFood.Name);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nPress 4 to see which products are in stock\nType 'exit' to quit");
-            Console.ForegroundColor = ConsoleColor.Gray;
+            catch (JsonException ex)
+            {
+                Console.WriteLine("Error deserializing JSON: " + ex.Message);
+            }
         }
         else if (productType.ToLower() == "2")
         {
-            DogLeash dogLeash = new();
-            Console.Write("New dog leash\nEnter Name: ");
-            dogLeash.Name = Console.ReadLine();
-            string? priceInput;
-            decimal price;
-            do
+            Console.WriteLine("Enter new dog leash in JSON format:");
+            var userInputAsJson = Console.ReadLine();
+            try
             {
-                Console.Write("Enter Price: ");
-                priceInput = Console.ReadLine();
-            }
-            while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
-            dogLeash.Price = price;
+                var dogLeash = userInputAsJson != null ? JsonSerializer.Deserialize<DogLeash>(userInputAsJson) : null;
 
-            string? quantityInput;
-            int quantity;
-            do
+                /*DogLeash dogLeash = new();
+                Console.Write("New dog leash\nEnter Name: ");
+                dogLeash.Name = Console.ReadLine();
+                string? priceInput;
+                decimal price;
+                do
+                {
+                    Console.Write("Enter Price: ");
+                    priceInput = Console.ReadLine();
+                }
+                while (!decimal.TryParse(priceInput.Replace("$", "").Trim(), out price));
+                dogLeash.Price = price;
+
+                string? quantityInput;
+                int quantity;
+                do
+                {
+                    Console.Write("Enter Quantity: ");
+                    quantityInput = Console.ReadLine();
+                }
+                while (!int.TryParse(quantityInput, out quantity));
+                dogLeash.Quantity = quantity;
+
+                Console.Write("Enter Description: ");
+                dogLeash.Description = Console.ReadLine();
+
+                string? lengthInput;
+                int length;
+                do
+                {
+                    Console.Write("Enter Length (in inches): ");
+                    lengthInput = Console.ReadLine();
+                }
+                while (!int.TryParse(lengthInput, out length));
+                dogLeash.LengthInches = length;
+
+                Console.Write("Enter Material: ");
+                dogLeash.Material = Console.ReadLine(); */
+
+                productLogic.AddProduct(dogLeash);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Added " + dogLeash.Name);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nPress 4 to see which products are in stock\nType 'exit' to quit");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            catch (JsonException ex)
             {
-                Console.Write("Enter Quantity: ");
-                quantityInput = Console.ReadLine();
+                Console.WriteLine("Error deserializing JSON: " + ex.Message);
             }
-            while (!int.TryParse(quantityInput, out quantity));
-            dogLeash.Quantity = quantity;
-
-            Console.Write("Enter Description: ");
-            dogLeash.Description = Console.ReadLine();
-
-            string? lengthInput;
-            int length;
-            do
-            {
-                Console.Write("Enter Length (in inches): ");
-                lengthInput = Console.ReadLine();
-            }
-            while (!int.TryParse(lengthInput, out length));
-            dogLeash.LengthInches = length;
-
-            Console.Write("Enter Material: ");
-            dogLeash.Material = Console.ReadLine();
-
-            productLogic.AddProduct(dogLeash);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Added " + dogLeash.Name);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Press 1 to add a product\nPress 2 to view products\nPress 3 to view product by type\nPress 4 to see which products are in stock\nType 'exit' to quit");
-            Console.ForegroundColor = ConsoleColor.Gray;
         }
+
         else if (productType.ToLower() == "3")
         {
             DogFood dogFood = new();
@@ -297,7 +330,7 @@ while (userInput.ToLower() != "exit")
             Console.WriteLine("Type 'exit' to quit");
             Console.WriteLine("Type '1' to enter another product");*/
         }
-        
+
         //Notifies user that their input is not valid
         else
         {
@@ -317,7 +350,7 @@ while (userInput.ToLower() != "exit")
 
         productPrinter.PrintProductDetails(allProducts);
 
-             
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Press 1 to add a product\nPress 2 to view all products\nPress 3 to view product by type\nPress 4 to see which items are in stock\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;
@@ -338,17 +371,23 @@ while (userInput.ToLower() != "exit")
     {
         Console.WriteLine("These products are in stock:");
         var inStock = productLogic.GetOnlyInStockProducts();
+        var totalPrice = productLogic.GetTotalPriceOfInventory();
         foreach (var item in inStock)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(item);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        //Console.WriteLine($"Total product value: ${productLogic.GetTotalPriceOfInventory()}");
+        Console.WriteLine($"Total product value: $" + totalPrice);
+        Console.ForegroundColor = ConsoleColor.Gray;
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Press 1 to add a product\nPress 2 to view all products\nPress 3 to view product by type\nPress 4 to see which items are in stock\nType 'exit' to quit");
         Console.ForegroundColor = ConsoleColor.Gray;
     }
-    
+
     userInput = Console.ReadLine();
 
 

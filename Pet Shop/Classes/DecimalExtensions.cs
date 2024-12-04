@@ -8,6 +8,7 @@ namespace Pet_Shop.Classes
 {
     internal static class DecimalExtensions
     {
+        //Adds discount information
         public static decimal DiscountPrice(decimal value)
         {
             return value * 0.9M;
