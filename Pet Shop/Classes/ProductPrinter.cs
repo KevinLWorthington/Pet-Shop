@@ -16,10 +16,6 @@ namespace Pet_Shop
         {
             try             //Throw exception if no products have been entered when trying to view all products
             {
-                if (allProducts == null || allProducts.Count == 0)
-                {
-                    throw new Exception("No product information available.\nPress any button to continue");
-                }
                 foreach (var product in allProducts)
                 {
                     // Display common product details
